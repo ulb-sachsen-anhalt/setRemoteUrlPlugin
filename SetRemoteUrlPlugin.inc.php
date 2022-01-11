@@ -23,10 +23,12 @@ class SetRemoteUrlPlugin extends GenericPlugin {
         $application = Application::get(); 
         $className = $application->getQualifiedDAOName('ArticleGalleyDAO');
         if ($className) {                                                                                
-            $fileDao = DAORegistry::getDAO('ArticleGalleyDAO');                       
+            $fileDao = DAORegistry::getDAO('ArticleGalleyDAO');
+            $tablename = "publication_galleys";                                
          } else {                                                    
-            $fileDao = DAORegistry::getDAO('PublicationFormatDAO');  
-         }     
+            $fileDao = DAORegistry::getDAO('PublicationFormatDAO');
+            $tablename = "publication_formats";
+        }     
         
         $template =& $args[1];
         $request = Application::get()->getRequest();
@@ -52,7 +54,7 @@ class SetRemoteUrlPlugin extends GenericPlugin {
         // ok, everything matches
         // we'll write new remote_url    
         $results = $fileDao->retrieve(
-            "update publication_galleys set remote_url=? where publication_id=?",
+            "update $tablename set remote_url=? where publication_id=?",
             [$remote_url, $publication_id]
             );
         foreach ($results as $g) {}
