@@ -20,7 +20,14 @@ class SetRemoteUrlPlugin extends GenericPlugin {
         }
         
     public function setRemoteUrl($hookName, $args) {
-        $galleyDao = DAORegistry::getDAO('ArticleGalleyDAO');
+        $application = Application::get(); 
+        $className = $application->getQualifiedDAOName('ArticleGalleyDAO');
+        if ($className) {                                                                                
+            $fileDao = DAORegistry::getDAO('ArticleGalleyDAO');                       
+         } else {                                                    
+            $fileDao = DAORegistry::getDAO('PublicationFormatDAO');  
+         }     
+        
         $template =& $args[1];
         $request = Application::get()->getRequest();
         if ($template != 'frontend/pages/indexSite.tpl') return false;
@@ -44,7 +51,7 @@ class SetRemoteUrlPlugin extends GenericPlugin {
             }
         // ok, everything matches
         // we'll write new remote_url    
-        $results = $galleyDao->retrieve(
+        $results = $fileDao->retrieve(
             "update publication_galleys set remote_url=? where publication_id=?",
             [$remote_url, $publication_id]
             );
