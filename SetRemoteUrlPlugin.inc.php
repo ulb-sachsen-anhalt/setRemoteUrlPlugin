@@ -37,6 +37,7 @@ class SetRemoteUrlPlugin extends GenericPlugin {
         $publication_id=null;
         $token=null;
         $queryarray = $request->getQueryArray();
+        if(!array_key_exists('token', $queryarray)) return false;
         foreach($queryarray as $key => $value) {
             error_log($key."=".$value);
             if ($key == 'publication_id') $publication_id=$value;
