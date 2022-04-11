@@ -1,9 +1,9 @@
 # Plugin for OMP and OJS
 
-The _SetRemoteUrlPlugin_ provides the ability to update the _urlRemote_ of galleys(OJS) or publicationFormat(OMP), which is not supported by the formal API by now.
+The _SetRemoteUrlPlugin_ provides the ability to update the _urlRemote_ of galleys(OJS) or publicationFormat(OMP), which is not supported by the formal API as off now.
 
 For testing the function you have to copy _this_ PlugIn in the 'generic'-Plugin section of your OJS or OMP installation.
-Activate the PlugIn at **Site-Level** in your Browser and provide a token via settings, to secure your Application.
+Activate the PlugIn at **Site-Level** in your browser and provide a token via settings, to secure your application.
 
 Now test:
 
