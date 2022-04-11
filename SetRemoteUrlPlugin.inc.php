@@ -46,11 +46,13 @@ class SetRemoteUrlPlugin extends GenericPlugin {
             }
         if($token==null) {
             error_log('[ERROR] token missing');
-            return false;
+            $dispatcher = $request->getDispatcher();
+            $dispatcher->handle404();
             }
         if($token!=$this->getSetting(42, 'token')) {
             error_log('[ERROR] token given, but not correct. Check Plugin settings');
-            return false;
+            $dispatcher = $request->getDispatcher();
+            $dispatcher->handle404();
             }
         // ok, everything matches
         // we'll write new remote_url    
